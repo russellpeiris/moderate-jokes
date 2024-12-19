@@ -24,18 +24,29 @@ const getRandomeJokeFromSubmitService = async (req: Request, res: Response) => {
 
 const updateAndSendToDeliverService = async (req: Request, res: Response) => {
   try {
-    const { jokeId, joke, status, category } = req.body;
+    const { jokeId, joke, category } = req.body;
 
-    await axios.delete(`${process.env.SUBMIT_SERVICE_URL}/jokes/${jokeId}`);
-    await axios.post(
-      `${process.env.DELIVER_SERVICE_URL}/deliver-service/jokes`,
-      {
-        jokeId,
-        joke,
-        status,
-        category,
-      },
+    const deleteRes = await axios.delete(
+      `${process.env.SUBMIT_SERVICE_URL}/submit-service/jokes/${jokeId}`,
     );
+    if (deleteRes.status !== 200) {
+      res.status(500).json({ message: 'Failed to delete joke' });
+    } else {
+      const deliverRes = await axios.post(
+        `${process.env.DELIVER_SERVICE_URL}/deliver-service/jokes`,
+        {
+          jokeId,
+          joke,
+          category,
+        },
+      );
+
+      if (deliverRes.status !== 201) {
+        res.status(500).json({ message: 'Failed to update joke' });
+      } else {
+        res.status(201).json({ message: 'Joke updated successfully' });
+      }
+    }
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
