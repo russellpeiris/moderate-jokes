@@ -1,0 +1,42 @@
+// login request 
+
+POST /auth/login HTTP/1.1
+Host: localhost:4002
+Content-Type: application/json
+Content-Length: 36
+
+{
+    "email": "admin@admin.com",
+    "password": "admin123"
+}
+
+###
+
+GET /moderator/jokes HTTP/1.1
+Host: localhost:4002
+Content-Type: application/json
+
+###
+
+PATCH  /moderator/jokes/1 HTTP/1.1
+Host: localhost:4002
+Content-Type: application/json
+Content-Length: 36
+
+{
+    "jokeId": "6763a62032eac0d44e7b570c",
+}
+
+### 
+POST /moderator/category HTTP/1.1
+Host: localhost:4002
+Content-Type: application/json
+
+{
+  "category": "New"
+}
+
+###
+GET /moderator/category HTTP/1.1
+Host: localhost:4002
+Content-Type: application/json
