@@ -9,7 +9,7 @@ const jokesRouter = Router();
 
 jokesRouter.get('/', getRandomeJokeFromSubmitService);
 
-jokesRouter.delete('/', deleteJokeFromSubmitService);
+jokesRouter.delete('/:jokeId', deleteJokeFromSubmitService);
 
 jokesRouter.patch('/', updateAndSendToDeliverService);
 

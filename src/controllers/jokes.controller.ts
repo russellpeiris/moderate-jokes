@@ -3,8 +3,10 @@ import { Request, Response } from 'express';
 
 const deleteJokeFromSubmitService = async (req: Request, res: Response) => {
   try {
-    const { jokeId } = req.body;
-    await axios.delete(`${process.env.SUBMIT_SERVICE_URL}/jokes/${jokeId}`);
+    const { jokeId } = req.params;
+    await axios.delete(
+      `${process.env.SUBMIT_SERVICE_URL}/submit-service/jokes/${jokeId}`,
+    );
     res.status(200).json({ message: 'Joke deleted successfully' });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
