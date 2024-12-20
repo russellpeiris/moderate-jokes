@@ -1,5 +1,9 @@
 import axios from 'axios';
 import { Request, Response } from 'express';
+import dotenv from 'dotenv';
+
+const environment = process.env.NODE_ENV || 'development';
+dotenv.config({ path: `.env.${environment}` });
 
 const deleteJokeFromSubmitService = async (req: Request, res: Response) => {
   try {

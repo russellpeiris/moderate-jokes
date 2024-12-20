@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/moderator/auth', authRouter);
-app.use('/moderator/jokes', jokesRouter);
+app.use('/moderator/jokes', authRouter, jokesRouter);
 app.use('/moderator/category', categoryRouter);
 
 app.listen(process.env.PORT, () => {
