@@ -5,12 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "4200:4200"
+      - "4002:4002"
     environment:
       - NODE_ENV=production
       - PORT=4002
-      - SUBMIT_SERVICE_URL=http://20.6.129.109:4001
-      - DELIVER_SERVICE_URL=http://20.2.80.201:4003
+      - SUBMIT_SERVICE_URL=https://submit-service.ddns.net
+      - DELIVER_SERVICE_URL=https://deliver-service.duckdns.org
     networks:
       - joke-network
 
